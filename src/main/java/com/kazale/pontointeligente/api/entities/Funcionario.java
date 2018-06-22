@@ -120,6 +120,7 @@ public class Funcionario implements Serializable{
 		return qtdHorasAlmoco;
 	}
 	
+	// @Transient indica que o atributo não deve ser persistido pelo JPA
 	@Transient
 	public Optional<Float> getQtdHorasAlmocoOpt() {
 		return Optional.ofNullable(qtdHorasAlmoco);
