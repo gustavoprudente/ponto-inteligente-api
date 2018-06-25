@@ -6,7 +6,7 @@ import java.util.List;
 public class Response<T> {
 
 	private T data;
-	private List<String> erros;
+	private List<String> errors;
 	
 	public Response() {
 	}
@@ -19,15 +19,15 @@ public class Response<T> {
 		this.data = data;
 	}
 
-	public List<String> getErros() {
-		if (this.erros == null) {
-			this.erros = new ArrayList<String>();
+	public List<String> getErrors() {
+		if (this.errors == null) {
+			this.errors = new ArrayList<String>();
 		}
-		return erros;
+		return errors;
 	}
 
-	public void setErros(List<String> erros) {
-		this.erros = erros;
+	public void setErrors(List<String> errors) {
+		this.errors = errors;
 	}
 		
 }
