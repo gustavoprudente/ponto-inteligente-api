@@ -93,7 +93,7 @@ public class LancamentoController {
 		
 		Optional<Lancamento> lancamento = this.lancamentoService.buscarPorId(id);
 		
-		if (lancamento.isPresent()) {
+		if (!lancamento.isPresent()) {
 			log.info("Lançamento não encontrado para o ID: {}", id);
 			response.getErrors().add("Lançamento não encontrado para o ID: " + id);
 			return ResponseEntity.badRequest().body(response);
@@ -226,14 +226,18 @@ public class LancamentoController {
 	 * @param result
 	 */
 	private void validarFuncionario(LancamentoDto lancamentoDto, BindingResult result) {
+		
+		if (lancamentoDto.getFuncionarioId() == null) {
+			result.addError(new ObjectError("funcionario", "Funcionário não informado."));
+			return;
+		}
+		
 		log.info("Validando funcionário id {}: ", lancamentoDto.getFuncionarioId());
 
-		if ((lancamentoDto.getFuncionarioId() != null) && (!this.funcionarioService
-					.buscarPorId(lancamentoDto.getFuncionarioId()).isPresent())) {
-				result.addError(new ObjectError("funcionario", "Funcionário não encontrado. ID inexistente."));
-		}		
-		
-		result.addError(new ObjectError("funcionario", "Funcionário não informado."));
+		if (!this.funcionarioService.buscarPorId(lancamentoDto.getFuncionarioId()).isPresent()) {
+			result.addError(new ObjectError("funcionario", "Funcionário não encontrado. ID inexistente."));
+		}			
+
 	}
 
 	/**
