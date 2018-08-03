@@ -120,7 +120,6 @@ public class FuncionarioController {
 		if (funcionarioDto.getSenha().isPresent()) {
 			funcionario.setSenha(PasswordUtils.gerarBCrypt(funcionarioDto.getSenha().get()));
 		}
-		
-		
+				
 	}
 }
